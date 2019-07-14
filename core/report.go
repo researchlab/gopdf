@@ -131,9 +131,9 @@ func (report *Report) execute(exec bool) {
 		report.addAtomicCell("v|PAGE|" + strconv.Itoa(report.pageNo))
 		report.executeDetail()
 
-		report.pagination() // 分页
-
 		report.executePageFooter() // 最后一页的页脚
+
+		report.pagination() // 分页, 执行总页数脚本
 	}
 
 	report.converter.Execute()
