@@ -3,9 +3,9 @@ package core
 import (
 	"io/ioutil"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
-	"regexp"
 
 	"github.com/researchlab/gopdf/util"
 )
@@ -286,7 +286,8 @@ func (report *Report) GetPageEndX() float64 {
 
 // 页面开始坐标
 func (report *Report) GetPageStartXY() (x, y float64) {
-	return report.pageStartX / report.unit, report.pageStartY / report.unit
+	//return report.pageStartX / report.unit, report.pageStartY / report.unit
+	return report.pageStartX / 6, report.pageStartY / 6
 }
 
 func (report *Report) GetContentWidthAndHeight() (width, height float64) {

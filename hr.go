@@ -62,6 +62,9 @@ func (h *HLine) GenerateAtomicCell() {
 	}
 
 	cw, _ := h.pdf.GetContentWidthAndHeight()
+	ssx, _ := h.pdf.GetPageStartXY()
+	eex := h.pdf.GetPageEndX()
+	cw = eex - ssx
 	h.pdf.LineGrayColor(x, y, cw, h.width, h.color)
 
 	x, _ = h.pdf.GetPageStartXY()

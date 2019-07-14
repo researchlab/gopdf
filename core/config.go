@@ -53,15 +53,26 @@ func init() {
 		contentHeight: 1046.55,
 	}
 
-	defaultConfigs["A4"] = &Config{
+	defaultConfigs["A4S"] = &Config{
 		startX:        90.14,
 		startY:        72.00,
 		endX:          505.14,
 		endY:          769.89,
 		width:         595.28,
 		height:        841.89,
-		contentWidth:  415,
 		contentHeight: 697.89,
+		contentWidth:  415,
+	}
+
+	defaultConfigs["A4"] = &Config{
+		startX:        90.14,
+		startY:        72.00,
+		endY:          769.89,
+		width:         595.28,
+		height:        841.89,
+		contentHeight: 697.89,
+		endX:          555.14,
+		contentWidth:  465,
 	}
 
 	defaultConfigs["LTR"] = &Config{
