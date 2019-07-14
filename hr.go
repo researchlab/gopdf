@@ -4,11 +4,20 @@ import (
 	"github.com/researchlab/gopdf/core"
 )
 
+type LineType string
+
+var (
+	DashedLine   LineType = "dashed"   //虚线
+	DottedLine   LineType = "dotted"   //点
+	StraightLine LineType = "straight" //直线
+)
+
 type HLine struct {
-	pdf    *core.Report
-	color  float64
-	width  float64
-	margin core.Scope
+	pdf      *core.Report
+	color    float64
+	width    float64
+	lineType LineType
+	margin   core.Scope
 }
 
 func NewHLine(pdf *core.Report) *HLine {
@@ -32,6 +41,11 @@ func (h *HLine) SetColor(color float64) *HLine {
 	}
 
 	h.color = color
+	return h
+}
+
+func (h *HLine) SetLineType(lineType LineType) *HLine {
+	h.lineType = lineType
 	return h
 }
 
@@ -65,7 +79,7 @@ func (h *HLine) GenerateAtomicCell() {
 	ssx, _ := h.pdf.GetPageStartXY()
 	eex := h.pdf.GetPageEndX()
 	cw = eex - ssx
-	h.pdf.LineGrayColor(x, y, cw, h.width, h.color)
+	h.pdf.LineGrayColorEx(x, y, cw, h.width, h.color, string(h.lineType))
 
 	x, _ = h.pdf.GetPageStartXY()
 	h.pdf.SetXY(x, y+h.margin.Bottom+h.width)

@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"regexp"
@@ -206,7 +207,10 @@ func (report *Report) pagination() {
 		if strings.Index(line, "{#TotalPage#}") > -1 {
 			total := report.getpageNoBylineNo(i, list)
 			//fmt.Printf("total :%v\n", total)
+			fmt.Printf("a%va:%d\n", lines[i], len(lines[i]))
 			lines[i] = strings.Replace(lines[i], "{#TotalPage#}", strconv.Itoa(total), -1)
+			fmt.Printf("a%sa:%d\n", lines[i], len(lines[i]))
+
 		}
 	}
 
@@ -518,6 +522,22 @@ func (report *Report) LineGrayColor(x, y float64, w, h float64, gray float64) {
 	report.grayStroke(gray)
 	report.LineH(x, y, x+w)
 	report.LineType("straight", 0.01)
+	report.grayStroke(0)
+}
+
+func (report *Report) LineGrayColorEx(x, y float64, w, h float64, gray float64, lineType string) {
+	if gray < 0 || gray > 1 {
+		gray = 0.85
+	}
+	var lt = "straight"
+	switch lineType {
+	case "dashed", "dotted", "straight":
+		lt = lineType
+	}
+	report.LineType(lt, h)
+	report.grayStroke(gray)
+	report.LineH(x, y, x+w)
+	report.LineType(lt, 0.01)
 	report.grayStroke(0)
 }
 
